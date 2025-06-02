@@ -63,12 +63,6 @@ class Parkir
     kdr[3].kehilanganKarcis = true;
     kdr[3].member = true;
 
-
-  }
-
-  void tampilkanData()
-  {
-
   }
   
   void login()
@@ -122,6 +116,80 @@ class Parkir
         break;
     }
 
+  }
+
+  void cekPlat()
+  {
+    string ulang;
+    bool status = false;
+
+    cout << "Masukkan plat nomor: ";
+    cin.ignore();
+    getline(cin, cPlat); //ini bang
+    for (int i = 0; i < jumlah; i++)
+    {
+      if (cPlat == kdr[i].platNomor)
+      {
+        cout << "\n======================================================================\n"; 
+        cout << "Berikut detail kendaraanya, berdasarkan plat nomor: " << cPlat << endl;
+        cout << "Plat nomor: " <<  kdr[i].platNomor << endl;
+        cout << "Kode karcis: " <<  kdr[i].kode << endl;
+        cout << "Jenis kendaraan: " <<  kdr[i].jenis << endl;
+        cout << "\n======================================================================\n"; 
+        status = true;
+      }
+      
+    }
+
+    if (status == false)
+    {
+      cout << "Kendaraan tidak ditemukan, pastikan anda memasukkan plat nomer yang sesuai\n";
+    }
+
+    cout << "Apkah anda ingin menggecek kendaraan yang lain? (ya/tidak): ";
+    cin >> ulang;
+
+    if (ulang == "ya")
+    {
+      cekPlat();
+    }
+    
+  menuAdmin();
+  }
+  
+  void CekKarcis()
+  {
+    string ulang;
+    bool status = false;
+    cout << "Masukkan Kode Karcis: ";
+    cin >> cKode;
+    for (int i = 0; i < jumlah; i++)
+      {
+      if (cKode == kdr[i].kode)
+      {
+        cout << "\n======================================================================\n"; 
+        cout << "Berikut detail kendaraanya, berdasarkan plat nomor: " << cKode << endl;
+        cout << "Plat nomor: " <<  kdr[i].platNomor << endl;
+        cout << "Kode karcis: " <<  kdr[i].kode << endl;
+        cout << "Jenis kendaraan: " <<  kdr[i].jenis << endl;
+        cout << "\n======================================================================\n"; 
+        status = true;
+
+      }
+      
+    }
+    if (status == false)
+    {
+      cout << "Kendaraan tidak ditemukan, pastikan anda memasukkan kode karcis yang sesuai\n";
+    }
+    cout << "Apkah anda ingin menggecek kendaraan yang lain? (ya/tidak): ";
+    cin >> ulang;
+    if (ulang == "ya")
+    {
+      CekKarcis();
+    }
+    
+    menuAdmin();
   }
   
   void slotParkir()
@@ -187,79 +255,6 @@ class Parkir
       return mobil;
   }
   
-  void cekPlat()
-  {
-    string ulang;
-    bool status = false;
-
-    cout << "Masukkan plat nomor: ";
-    cin.ignore();
-    getline(cin, cPlat); //ini bang
-    for (int i = 0; i < jumlah; i++)
-    {
-      if (cPlat == kdr[i].platNomor)
-      {
-        cout << "\n======================================================================\n"; 
-        cout << "Berikut detail kendaraanya, berdasarkan plat nomor: " << cPlat << endl;
-        cout << "Plat nomor: " <<  kdr[i].platNomor << endl;
-        cout << "Kode karcis: " <<  kdr[i].kode << endl;
-        cout << "Jenis kendaraan: " <<  kdr[i].jenis << endl;
-        cout << "\n======================================================================\n"; 
-        status = true;
-      }
-      
-    }
-
-    if (status == false)
-    {
-      cout << "Kendaraan tidak ditemukan, pastikan anda memasukkan plat nomer yang sesuai\n";
-    }
-
-    cout << "Apkah anda ingin menggecek kendaraan yang lain? (ya/tidak): ";
-    cin >> ulang;
-
-    if (ulang == "ya")
-    {
-      cekPlat();
-    }
-    
-    menuAdmin();
-  }
-  
-  void CekKarcis()
-  {
-    string ulang;
-    bool status = false;
-    cout << "Masukkan Kode Karcis: ";
-    cin >> cKode;
-    for (int i = 0; i < jumlah; i++)
-      {
-      if (cKode == kdr[i].kode)
-      {
-        cout << "\n======================================================================\n"; 
-        cout << "Berikut detail kendaraanya, berdasarkan plat nomor: " << cKode << endl;
-        cout << "Plat nomor: " <<  kdr[i].platNomor << endl;
-        cout << "Kode karcis: " <<  kdr[i].kode << endl;
-        cout << "Jenis kendaraan: " <<  kdr[i].jenis << endl;
-        cout << "\n======================================================================\n"; 
-        status = true;
-
-      }
-      
-    }
-    if (status == false)
-    {
-      cout << "Kendaraan tidak ditemukan, pastikan anda memasukkan kode karcis yang sesuai\n";
-    }
-    cout << "Apkah anda ingin menggecek kendaraan yang lain? (ya/tidak): ";
-    cin >> ulang;
-    if (ulang == "ya")
-    {
-      CekKarcis();
-    }
-    
-    menuAdmin();
-  }
   
   void hilangKarcis()
   {
