@@ -1,0 +1,27 @@
+Fitur:
+1. Memonitoring dan pencarian kendaraan berdasarkan:
+- Nomor plat kendaraan 
+- Jenis kendaraan 
+- yang menampilkan detail kendaraan, waktu masuk, lokasi slot, dll
+
+2. Pencatatan slot parkir:
+- jumlah total slot berdasarkan jenis kendaraan
+- slot yang tersedia dan terpakai
+
+3. Pembayaran dan penghapusan data:
+- Sistem pembayaran bisa melalui tunai atau kartu
+- Hapus data kendaraan jika sudah konfirmasi pembayaran dan keluar
+
+4. Penambahan biaya jika ada tambahan penitipan barang / helm
+
+5. Kehilangan karcis parkir:
+- jika karcis hilang maka dikenakan denda biaya
+- Menunjukkan STNK sebagai bukti kepemilikan ( jika tidak ada, maka tidak bisa keluar )
+
+6.  Menampilkan laporan pemasukkan yang diterima:
+- laporan keuangan
+- laporan riwayat data jumlah masing-masing jenis kendaraan
+- laporan jumlah kendaraan yang terkena denda
+
+Fitur inovasi tambahan:
+7. Potongan harga spesial bagi pengguna yang memiliki kartu mall membership JWALK
