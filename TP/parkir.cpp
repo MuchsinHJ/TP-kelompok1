@@ -47,6 +47,17 @@ class Parkir
   Pemasukan PemasukanObj[100];
   public:
 
+  Parkir(){
+    cout << "\n+================================+";
+    cout << endl;
+    cout << "|   SELAMAT DATANG DI PARKIRAN   |";
+    cout << endl;
+    cout << "|           MALL JWALK           |";
+    cout << endl;
+    cout << "+================================+";
+    cout << endl;
+  }
+
   void data()
   {
     kdr[0].platNomor = "AD 2183 CB";
@@ -342,19 +353,19 @@ class Parkir
     }
   }
 
+  // Menggunakan metode linear search dengan perulangan while dan 2 kondisi
   void cekDataMotor(){
     int jumlahMotor = 0;
     cout << "\nBerikut data nomor plat untuk parkir motor: ";
     cout << endl;
-
-    for (int i = 0; i < jumlah; i++)
-    {
-      if (kdr[i].jenis == "motor")
-      {
-        cout << "Motor ke-" << jumlahMotor+1 << " dengan nomor plat: " << kdr[i].platNomor;
+    int i = 0;
+    while (i < jumlah) {
+      if (kdr[i].jenis == "motor") {
+        cout << "Motor ke-" << jumlahMotor + 1 << " dengan nomor plat: " << kdr[i].platNomor;
         cout << endl;
         jumlahMotor++;
       }
+      i++;
     }
 
     cout << "Jumlah data motor yang parkir di mall JWALK sebanyak: " <<  jumlahMotor;
@@ -362,7 +373,8 @@ class Parkir
     cekJenisKendaraan();
   }
   
-  void cekDataMobil(){
+  // Menggunakan metode binary search untuk mencari plat nomor mobil
+  void cekDataMobil() {
     int jumlahMobil = 0;
     cout << "\nBerikut data nomor plat untuk parkir Mobil: ";
     cout << endl;
@@ -397,69 +409,84 @@ class Parkir
     cout << endl;
     cout << "Masukkan jumlah kendaraan yang ingin ditambah: ";
     cin >> tambah;
-
-    for (int i = 0; i < tambah; i++)
-    {
-      do {
-        cout << "\nMasukkan plat nomor kendaraan: ";
-        cin.ignore();
-        getline(cin, kdr[jumlah+i].platNomor);
-        if (kdr[jumlah+i].platNomor.length() < 5 || kdr[jumlah+i].platNomor.length() > 15) {
-          cout << "Plat nomor harus terdiri dari 5 hingga 15 karakter! Silakan masukkan kembali! ";
-          cout << endl;
-        }
-      } while (kdr[jumlah+i].platNomor.length() < 5 || kdr[jumlah+i].platNomor.length() > 15);
-
-      do {
-        cout << "Tentukan kode karcis kendaraan: ";
-        cin >> kdr[jumlah+i].kode;
-        if (kdr[jumlah+i].kode.length() != 4) {
-          cout << "Kode karcis harus terdiri dari 4 karakter! Silakan masukkan kembali! ";
-          cout << endl;
-        }
-      } while (kdr[jumlah+i].kode.length() != 4);
-
-      do {
-        cout << "Masukkan jenis kendaraan: ";
-        cin >> kdr[jumlah+i].jenis;
-        if (kdr[jumlah+i].jenis != "motor" && kdr[jumlah+i].jenis != "mobil") {
-          cout << "Jenis kendaraan harus 'motor' atau 'mobil'! Silakan masukkan kembali: ";
-          cout << endl;
-        }
-      } while (kdr[jumlah+i].jenis != "motor" && kdr[jumlah+i].jenis != "mobil");
-
-      do {
-        cout << "Masukkan waktu lama kendaraan (jam): ";
-        cin >> kdr[jumlah+i].waktu;
-        if (kdr[jumlah+i].waktu <= 0) {
-        cout << "Waktu harus lebih dari 0! Silakan masukkan kembali! ";
-        cout << endl;
-        }
-        if (cin.fail()) {
+    
+    if (cin.fail()) {
             cout << "Input tidak valid! Mohon masukkan angka.";
             cout << endl;
             cin.clear(); // Menghapus flag error
             cin.ignore(10000, '\n'); // Mengabaikan input yang tidak valid
-            kdr[jumlah+i].waktu = -1; // Set waktu ke nilai negatif untuk mengulangi input
-        }
-      } while (kdr[jumlah+i].waktu <= 0);
+    }
 
-      cout << "Apakah ada penitipan helm? (ya/tidak): ";
-      cin >> helm;
-      if (helm == "ya") {
-        kdr[jumlah+i].penitipanHelm = true;
-      } else {
-        kdr[jumlah+i].penitipanHelm = false;
-      }
-      do{
-        cout << "Masukkan lokasi parkir kendaraan (misal: L1 atau L2): ";
-        cin.ignore();
-        getline(cin, kdr[jumlah+i].lokasi);
-        if (kdr[jumlah+i].lokasi != "L1" && kdr[jumlah+i].lokasi != "L2") {
-          cout << "Lokasi parkir harus 'L1' atau 'L2'! Silakan masukkan kembali! ";
+    if (tambah <= 0)
+    {
+      cout << "Jumlah kendaraan yang ingin ditambah harus lebih dari 0!";
+      cout << endl;
+    } else{
+
+      for (int i = 0; i < tambah; i++)
+      {
+        do {
+          cout << "\nMasukkan plat nomor kendaraan: ";
+          cin.ignore();
+          getline(cin, kdr[jumlah+i].platNomor);
+          if (kdr[jumlah+i].platNomor.length() < 5 || kdr[jumlah+i].platNomor.length() > 15) {
+            cout << "Plat nomor harus terdiri dari 5 hingga 15 karakter! Silakan masukkan kembali! ";
+            cout << endl;
+          }
+        } while (kdr[jumlah+i].platNomor.length() < 5 || kdr[jumlah+i].platNomor.length() > 15);
+  
+        do {
+          cout << "Tentukan kode karcis kendaraan: ";
+          cin >> kdr[jumlah+i].kode;
+          if (kdr[jumlah+i].kode.length() != 4) {
+            cout << "Kode karcis harus terdiri dari 4 karakter! Silakan masukkan kembali! ";
+            cout << endl;
+          }
+        } while (kdr[jumlah+i].kode.length() != 4);
+  
+        do {
+          cout << "Masukkan jenis kendaraan: ";
+          cin >> kdr[jumlah+i].jenis;
+          if (kdr[jumlah+i].jenis != "motor" && kdr[jumlah+i].jenis != "mobil") {
+            cout << "Jenis kendaraan harus 'motor' atau 'mobil'! Silakan masukkan kembali: ";
+            cout << endl;
+          }
+        } while (kdr[jumlah+i].jenis != "motor" && kdr[jumlah+i].jenis != "mobil");
+  
+        do {
+          cout << "Masukkan waktu lama kendaraan (jam): ";
+          cin >> kdr[jumlah+i].waktu;
+          if (kdr[jumlah+i].waktu <= 0) {
+          cout << "Waktu harus lebih dari 0! Silakan masukkan kembali! ";
           cout << endl;
+          }
+          if (cin.fail()) {
+              cout << "Input tidak valid! Mohon masukkan angka.";
+              cout << endl;
+              cin.clear(); // Menghapus flag error
+              cin.ignore(10000, '\n'); // Mengabaikan input yang tidak valid
+              kdr[jumlah+i].waktu = -1; // Set waktu ke nilai negatif untuk mengulangi input
+          }
+        } while (kdr[jumlah+i].waktu <= 0);
+  
+        cout << "Apakah ada penitipan helm? (ya/tidak): ";
+        cin >> helm;
+        if (helm == "ya") {
+          kdr[jumlah+i].penitipanHelm = true;
+        } else {
+          kdr[jumlah+i].penitipanHelm = false;
         }
-      } while (kdr[jumlah+i].lokasi != "L1" && kdr[jumlah+i].lokasi != "L2");
+        do{
+          cout << "Masukkan lokasi parkir kendaraan (misal: L1 atau L2): ";
+          cin.ignore();
+          getline(cin, kdr[jumlah+i].lokasi);
+          if (kdr[jumlah+i].lokasi != "L1" && kdr[jumlah+i].lokasi != "L2") {
+            cout << "Lokasi parkir harus 'L1' atau 'L2'! Silakan masukkan kembali! ";
+            cout << endl;
+          }
+        } while (kdr[jumlah+i].lokasi != "L1" && kdr[jumlah+i].lokasi != "L2");
+    }
+    
 
     }
 
@@ -474,8 +501,7 @@ class Parkir
     menuAdmin();
   }
 
-  void cekPlat()
-  {
+  void cekPlat() {
     string ulang;
     bool status = false;
     cout << "\nAnda memilih pencarian berdasarkan plat nomor";
@@ -483,36 +509,39 @@ class Parkir
     cout << "Masukkan plat nomor: ";
     cin.ignore();
     getline(cin, cPlat); 
-
     for (int i = 0; i < cPlat.length(); i++) {
         cPlat[i] = toupper(cPlat[i]);
     }
-    
-    for (int i = 0; i < jumlah; i++)
-    {
-      if (cPlat == kdr[i].platNomor)
+    int n = 0, index;
+    bool ketemu = false;
+    while(n < jumlah && !ketemu){
+      if (cPlat == kdr[n].platNomor)
+      {
+        ketemu = true;
+        index = n;
+      } else {
+        n++;
+      }
+    }
+      if (ketemu)
       {
         cout << "\n======================================================================"; 
         cout << endl;
         cout << "Berikut detail kendaraanya, berdasarkan plat nomor: " << cPlat;
         cout << endl;
-        cout << "Plat nomor: " <<  kdr[i].platNomor;
+        cout << "Plat nomor: " <<  kdr[index].platNomor;
         cout << endl;
-        cout << "Kode karcis: " <<  kdr[i].kode;
+        cout << "Kode karcis: " <<  kdr[index].kode;
         cout << endl;
-        cout << "Jenis kendaraan: " <<  kdr[i].jenis;
+        cout << "Jenis kendaraan: " <<  kdr[index].jenis;
         cout << endl;
-        cout << "Lokasi parkir: " << kdr[i].lokasi;
+        cout << "Lokasi parkir: " << kdr[index].lokasi;
         cout << endl;
         cout << "======================================================================"; 
         cout << endl;
-        status = true;
       }
-      
-    }
     
-    if (status == false)
-    {
+    else {
       cout << "\n\n========================================================================"; 
       cout << endl;
       cout << "Kendaraan tidak ditemukan, pastikan anda memasukkan plat nomer yang sesuai";
@@ -535,41 +564,48 @@ class Parkir
   void cekKodeKarcis()
   {
     string ulang;
-    bool status = false;
     cout << "\nAnda memilih pencarian berdasarkan kode karcis";
     cout << endl;
     cout << "Masukkan Kode Karcis: ";
     cin >> cKode;
-
     for (int i = 0; i < cKode.length(); i++) {
         cKode[i] = toupper(cKode[i]);
     }
 
-    for (int i = 0; i < jumlah; i++)
-      {
-      if (cKode == kdr[i].kode)
-      {
-        cout << "\n======================================================================"; 
-        cout << endl;
-        cout << "Berikut detail kendaraanya, berdasarkan kode karcis: " << cKode;
-        cout << endl;
-        cout << "Plat nomor: " <<  kdr[i].platNomor;
-        cout << endl;
-        cout << "Kode karcis: " <<  kdr[i].kode;
-        cout << endl;
-        cout << "Jenis kendaraan: " <<  kdr[i].jenis;
-        cout << endl;
-        cout << "Lokasi parkir: " << kdr[i].lokasi;
-        cout << endl;
-        cout << "======================================================================"; 
-        cout << endl;
-        status = true;
-        
+    bool ketemu = false;
+    int low = 0;
+    int high = jumlah - 1;
+    int mid;
+
+    while (low <= high && !ketemu) {
+      mid = (low + high) / 2;
+      if (cKode == kdr[mid].kode) {
+        ketemu = true;
+      } else if (cKode < kdr[mid].kode) {
+        high = mid - 1;
+      } else {
+        low = mid + 1;
       }
-      
     }
-    if (status == false)
-    {
+    
+    if (ketemu) {
+      cout << "\n======================================================================"; 
+      cout << endl;
+      cout << "Berikut detail kendaraanya, berdasarkan kode karcis: " << cKode;
+      cout << endl;
+      cout << "Plat nomor: " <<  kdr[mid].platNomor;
+      cout << endl;
+      cout << "Kode karcis: " <<  kdr[mid].kode;
+      cout << endl;
+      cout << "Jenis kendaraan: " <<  kdr[mid].jenis;
+      cout << endl;
+      cout << "Lokasi parkir: " << kdr[mid].lokasi;
+      cout << endl;
+      cout << "======================================================================"; 
+      cout << endl;
+    }
+    
+    else {
       cout << "\n\n======================================================================"; 
       cout << endl;
       cout << "Kendaraan tidak ditemukan, pastikan anda memasukkan kode karcis yang sesuai";
@@ -577,10 +613,10 @@ class Parkir
       cout << "======================================================================"; 
       cout << endl;
     }
+
     cout << "\nApkah anda ingin menggecek kendaraan yang lain? (ya/tidak): ";
     cin >> ulang;
-    if (ulang == "ya")
-    {
+    if (ulang == "ya"){
       cekKodeKarcis();
     }
     
@@ -714,7 +750,11 @@ class Parkir
     {
       cout << "Masukkan kode karcis: ";
       cin >> karcis;
-      
+
+      for (int i = 0; i < karcis.length(); i++) {
+        karcis[i] = toupper(karcis[i]);
+    }
+
       for (int i = 0; i < jumlah; i++)
       {
         if (karcis == kdr[i].kode)
@@ -857,8 +897,9 @@ class Parkir
     
     for (int i = 0; i < cekPlat.length(); i++) {
         cekPlat[i] = toupper(cekPlat[i]);
+        cout << cekPlat[i];
     }
-
+    cout << endl;
     for (int i = 0; i < jumlah; i++)
     {
         if (cekPlat == kdr[i].platNomor)
@@ -1060,8 +1101,8 @@ class Parkir
       pembayaran(i);
       break;
       }
+      cetakDataDenda(i);
       kendaraanKeluar(i);
-      
       cout << "\nSlot sebelum penghapusan: ";
       cout << "\n- Motor: " << slotMotor() << " terisi";
       cout << "\n- Mobil: " << slotMobil() << " terisi";
@@ -1256,7 +1297,7 @@ class Parkir
 
   void cetakDataDenda(int i){
     ofstream out;
-    out.open("denda.txt"); 
+    out.open("denda.txt", ios::app); 
     if (!out)
     {
       out << "Gagal membuka file untuk menyimpan data denda.";
@@ -1309,6 +1350,7 @@ class Parkir
     }
     if (jumlahDenda == 0) {
       cout << "Belum ada kendaraan yang terkena denda.";
+      cout << endl;
       cout << "+=================================+";
       cout << endl;
     } else {
@@ -1332,7 +1374,7 @@ class Parkir
     cout << endl;
     cout << "|2. Tambah kendaraan                           |";    
     cout << endl;
-    cout << "|3. Tampilkan data                             |";    
+    cout << "|3. Tampilkan data kendaraan                   |";    
     cout << endl;
     cout << "|4. Cek Slot Parkir                            |";    
     cout << endl;
@@ -1427,14 +1469,6 @@ class Parkir
   {
     int pilihan;
     data();
-    cout << "\n+================================+";
-    cout << endl;
-    cout << "|   SELAMAT DATANG DI PARKIRAN   |";
-    cout << endl;
-    cout << "|           MALL JWALK           |";
-    cout << endl;
-    cout << "+================================+";
-    cout << endl;
     cout << "+================================+";
     cout << endl;
     cout << "|        MENU LOGIN ADMIN        |";
@@ -1449,6 +1483,14 @@ class Parkir
     cout << endl;
     cout << "Silahkan pilih 1 jika ingin lanjut login, silahkan pilih 0 jika tidak jadi login: ";
     cin >> pilihan;
+
+    if (cin.fail()) {
+            cout << "Input tidak valid! Mohon masukkan angka.";
+            cout << endl;
+            cin.clear(); // Menghapus flag error
+            cin.ignore(10000, '\n'); // Mengabaikan input yang tidak valid
+            alur();
+    }
 
     if (pilihan == 1)
     {
@@ -1729,17 +1771,13 @@ class Parkir
   }
 
   void sortWaktuTerlama(){
-    cout << "\n+================================+";
-    cout << endl;
-    cout << "|    SORT WAKTU PARKIR TERLAMA    |"; 
-    cout << endl;
-    cout << "+=================================+";
-    cout << endl;
-    // gunakan bubble sort
+    cout << "\n+================================+" << endl;
+    cout << "|    SORT WAKTU PARKIR TERLAMA    |" << endl;
+    cout << "+=================================+" << endl;
+    // menggunakan bubble sort 
     for (int i = 0; i < jumlah - 1; i++) {
       for (int j = 0; j < jumlah - i - 1; j++) {
         if (kdr[j].waktu < kdr[j + 1].waktu) {
-          // tukar
           Kendaraan temp = kdr[j];
           kdr[j] = kdr[j + 1];
           kdr[j + 1] = temp;
@@ -2004,9 +2042,7 @@ int main()
     return 1;
   }
   keluar.close();
-  
   Parkir pkr;
   pkr.alur();
-  
   return 0;  
 }
